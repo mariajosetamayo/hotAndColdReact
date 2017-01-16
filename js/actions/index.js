@@ -1,8 +1,8 @@
 
 export const GUESS_NUMBER = 'GUESS_NUMBER';
-export const guessNumber = number => ({
+export const guessNumber = reponse => ({
   type: GUESS_NUMBER,
-  number
+  reponse: {numberGuessed: 2, prompt: 'cold', numberOfGuesses: 2, numbersGuessed:[2]}
 });
 
 // export const UPDATE_GUESS_PROMPT = 'UPDATE_GUESS_PROMPT';
