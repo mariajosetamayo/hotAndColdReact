@@ -1,15 +1,19 @@
-import * actions from '../actions/index';
+import * as actions from '../actions/index';
 
 const initialGameState = [];
 
-export const gameReducer = (state = initialGameState, action) =>
-  if (action.type === actions.GUESS_NUMBER){
-      return [...state,{
-        
-      }]
+export const hotColdReducer = (state = initialGameState, action) =>{
+  if (action.type === actions.NEW_USER_GUESS){
+    return [...state,{
+        randomNumber: action.randomNumber,
+        guessesArray: [action.guessesArray]
+    }]
   }
-  else if (action.type === actions.NEW_RANDOM_NUMBER){
-
+  else if (action.type === actions.RESET_GAME){
+    return [...state,{
+      randomNumber: action.randomNumber,
+      guessesArray:[]
+    }]
   }
   return state;
 };
