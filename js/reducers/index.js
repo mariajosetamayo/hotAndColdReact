@@ -7,7 +7,7 @@ const initialGameState = {
 
 export const hotColdReducer = (state = initialGameState, action) =>{
   if (action.type === actions.RESET_GAME){
-    const newGameObject = Object.assign({}, state, {randomNumber: Math.floor(Math.random() * 100) + 1}, {guesses:[]})
+    const newGameObject = Object.assign({}, state, {randomNumber:Math.floor(Math.random() * 100) + 1}, {guesses:[]})
     return newGameObject
   }
   else if (action.type === actions.NEW_USER_GUESS){

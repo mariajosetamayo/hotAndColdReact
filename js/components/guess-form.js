@@ -16,9 +16,9 @@ class GuessForm extends Component {
 
   render (){
     return(
-      <div className = "form-control col-md-4">
+      <div>
         <label>
-          Guess a number between 0 and 100:
+          <h3>Guess a number between 0 and 100:</h3>
           <input ref={ref => this.newGuess = ref} />
         </label>
         <button type="button" className="btn btn-primary" onClick={this.onInputChange}>Submit</button>

@@ -62,7 +62,7 @@ class GuessFeedback extends Component {
 
   render(){
     return (
-      <div className= "list-group col-sm-4">
+      <div className= "list-group">
         <ul>
           <div><h3>Feedback</h3>{this.renderFeedback()}</div>
         </ul>
