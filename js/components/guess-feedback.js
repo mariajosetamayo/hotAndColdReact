@@ -6,7 +6,7 @@ import store from '../store';
 class GuessFeedback extends Component {
   constructor(props){
     super(props);
-    console.log(props)
+
     this.state = {
       randomNumber: '',
       guesses: []
@@ -17,6 +17,36 @@ class GuessFeedback extends Component {
         guesses: store.getState().guesses
       });
     });
+  }
+
+  renderFeedback () {
+    let guessFeedback;
+    if(this.state.guesses.length === 0){
+      guessFeedback = 'Feedback for your guess will display here'
+    }
+    else {
+      const guessAndRandomNumberDifference = Math.abs(this.state.randomNumber - this.state.guesses.slice(-1));
+      console.log('this is the difference', guessAndRandomNumberDifference)
+
+      if ( guessAndRandomNumberDifference === 0){
+        guessFeedback = 'You won!'
+      }
+      else if (guessAndRandomNumberDifference < 5){
+        guessFeedback = 'Hot';
+      }
+      else if (guessAndRandomNumberDifference <10){
+        guessFeedback = 'Very Warm';
+      }
+      else if (guessAndRandomNumberDifference<20) {
+        guessFeedback = 'Warm';
+      }
+      else {
+        guessFeedback = 'Cold';
+      }
+    }
+    return (
+      <p>{guessFeedback}</p>
+    )
   }
 
   renderGuessesList () {
@@ -34,12 +64,17 @@ class GuessFeedback extends Component {
     return (
       <div className= "list-group col-sm-4">
         <ul>
+          <div><h3>Feedback</h3>{this.renderFeedback()}</div>
+        </ul>
+        <ul>
           <h3>Number of Guesses: </h3>
           <p>{this.state.guesses.length}</p>
         </ul>
         <ul>
           <h3>Numbers Guessed: </h3>
-          {this.renderGuessesList()}
+          <ul>
+            {this.renderGuessesList()}
+          </ul>
         </ul>
       </div>
     );
