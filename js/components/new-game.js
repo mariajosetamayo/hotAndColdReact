@@ -15,9 +15,9 @@ class NewGame extends Component {
 
   render (){
     return(
-      <div>
-        <h1>Hot-n-Cold</h1>
-        <button type="button" className="btn btn-primary" onClick={this.onNewGameButtonClick}>Play again</button>
+      <div className="titleContainer">
+        <h1 className="title">Hot-n-Cold</h1>
+        <button type="button" className="btn btn-primary playAgainBtn" onClick={this.onNewGameButtonClick}>Play again</button>
       </div>
     )
   }

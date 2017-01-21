@@ -1,0 +1,47 @@
+.jumbotron{
+  margin-left:30%;
+  margin-right: 30%;
+  margin-top: 10%;
+}
+
+.guessInput{
+  text-align: center;
+}
+
+.list-group{
+  margin-top: 10%;
+}
+
+.titleContainer{
+  margin-left: 40%;
+  margin-top: 7%;
+}
+
+.title{
+  font-size: 60px;
+}
+
+.playAgainBtn{
+  margin-left: 14%;
+  margin-top: 6%;
+  margin-bottom: -9%;
+}
+
+li{
+  list-style: none;
+  font-size: 22px;
+  color: #1AA3A3;
+  font-weight: bold;
+}
+
+.guessesNumber{
+  font-size: 22px;
+  color: #1AA3A3;
+  font-weight: bold;
+}
+
+.feedback{
+  color: #1AA3A3;
+  font-weight: bold;
+  font-size: 22px;
+}

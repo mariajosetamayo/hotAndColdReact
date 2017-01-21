@@ -21,8 +21,13 @@ class GuessFeedback extends Component {
 
   renderFeedback () {
     let guessFeedback;
+    let currentGuess = Number(this.state.guesses.slice(-1))
+    console.log('this is the guess', currentGuess)
     if(this.state.guesses.length === 0){
-      guessFeedback = 'Feedback for your guess will display here'
+      guessFeedback = 'Feedback for your guess will display here';
+    }
+    else if (isNaN(currentGuess) || currentGuess > 100 ){
+      guessFeedback = 'Please enter a number between 1 and 100';
     }
     else {
       const guessAndRandomNumberDifference = Math.abs(this.state.randomNumber - this.state.guesses.slice(-1));
@@ -45,9 +50,10 @@ class GuessFeedback extends Component {
       }
     }
     return (
-      <p>{guessFeedback}</p>
+      <h6 className="feedback">{guessFeedback}</h6>
     )
   }
+
 
   renderGuessesList () {
     return this.state.guesses.map((guess) =>{
@@ -68,7 +74,7 @@ class GuessFeedback extends Component {
         </ul>
         <ul>
           <h3>Number of Guesses: </h3>
-          <p>{this.state.guesses.length}</p>
+          <p className="guessesNumber">{this.state.guesses.length}</p>
         </ul>
         <ul>
           <h3>Numbers Guessed: </h3>
