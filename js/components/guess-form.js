@@ -12,6 +12,7 @@ class GuessForm extends Component {
   onInputChange (){
     const guess = this.newGuess.value;
     this.props.dispatch(actions.newUserGuess(guess));
+    this.newGuess.value='';
   }
 
   render (){
