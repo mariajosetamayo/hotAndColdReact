@@ -2,7 +2,8 @@ import * as actions from '../actions/index';
 
 const initialGameState = {
   randomNumber: Math.floor(Math.random() * 100) + 1,
-  guesses: []
+  guesses: [],
+  fewestGuesses: ''
 }
 
 export const hotColdReducer = (state = initialGameState, action) =>{
@@ -19,6 +20,17 @@ export const hotColdReducer = (state = initialGameState, action) =>{
     const updatedGameObject = Object.assign({}, state,{guesses: [...before, action.guess]})
     console.log('this is the new array', updatedGameObject)
     return updatedGameObject
+  }
+  else if (action.type === actions.FETCH_FEWEST_GUESSES_SUCCESS){
+    const lastElementOfAttemptsArray = state.fewestGuesses[state.fewestGuesses.length -1];
+    const before = state.fewestGuesses.slice(0, lastElementOfAttemptsArray);
+    const updatedFewestGuessesObject = Object.assign({}, state, {fewestGuesses: [...before, action.fewestGuesses]})
+    return updatedFewestGuessesObject
+  }
+  else if (action.type === actions.FETCH_FEWEST_GUESSES_ERROR) {
+    if (state.fewestGuesses.length === 0)
+      console.log('An error occurred: ' + action.error);
+      return state;
   }
   return state;
 };

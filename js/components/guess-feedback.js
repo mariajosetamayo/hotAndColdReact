@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import store from '../store';
+import * as actions from '../actions/index';
 
 class GuessFeedback extends Component {
   constructor(props){
@@ -14,7 +15,8 @@ class GuessFeedback extends Component {
     store.subscribe(() => {
       this.setState({
         randomNumber: store.getState().randomNumber,
-        guesses: store.getState().guesses
+        guesses: store.getState().guesses,
+        fewestGuesses: store.getState().fewestGuesses
       });
     });
   }
@@ -66,6 +68,12 @@ class GuessFeedback extends Component {
     })
   }
 
+  componentDidMount(){
+    this.props.dispatch(
+      actions.fetchFewestGuesses(this.state.fewestGuesses)
+    )
+  }
+
   render(){
     return (
       <div className= "list-group">
@@ -81,6 +89,9 @@ class GuessFeedback extends Component {
           <ul>
             {this.renderGuessesList()}
           </ul>
+        </ul>
+        <ul>
+          <div><h3>Fewest Guesses</h3>{this.state.fewestGuesses}</div>
         </ul>
       </div>
     );

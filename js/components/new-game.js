@@ -13,6 +13,12 @@ class NewGame extends Component {
     this.props.dispatch(actions.resetGame());
   }
 
+  componentDidMount(){
+    this.props.dispatch(
+      actions.saveFewestGuesses(this.props.guesses.length)
+    )
+  }
+
   render (){
     return(
       <div className="titleContainer">
