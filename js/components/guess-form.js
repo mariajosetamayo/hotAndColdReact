@@ -16,6 +16,12 @@ class GuessForm extends Component {
   }
 
   render (){
+    console.log('length of guesses', this.props.guesses.won)
+    if(this.props.guesses.won === true){
+      this.props.dispatch(
+        actions.saveFewestGuesses(this.props.guesses.guesses.length)
+      )
+    }
     return(
       <div className="guessInput">
         <label>

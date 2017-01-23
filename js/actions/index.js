@@ -1,5 +1,6 @@
 import isomorphicFetch from 'isomorphic-fetch';
 
+
 export const NEW_USER_GUESS = 'NEW_USER_GUESS';
 export const newUserGuess = (guess) => ({
   type: NEW_USER_GUESS,
@@ -13,9 +14,8 @@ export const resetGame = (randomNumber) => ({
 });
 
 export const FETCH_FEWEST_GUESSES_SUCCESS = 'FETCH_FEWEST_GUESSES_SUCCESS';
-export const fetchFewestGuessesSuccess = (guesses, fewestGuesses) => ({
+export const fetchFewestGuessesSuccess = (fewestGuesses) => ({
   type: FETCH_FEWEST_GUESSES,
-  guesses,
   fewestGuesses
 });
 
@@ -27,12 +27,12 @@ export const fetchFewestGuessesError = (guesses, error) => ({
 });
 
 export const fetchFewestGuesses = guesses => dispatch => {
-  const url = `/fewest-guesses`;
+  const url = 'http://localhost:8090/fewest-guesses';
   return fetch(url).then(response => {
-    if (!response.ok){
-      const error = new Error(response.statusText)
-      error.response = response
-      throw error;
+    if (response.status < 200 || response.status >= 300) {
+        var error = new Error(response.statusText)
+        error.response = response
+        throw error;
     }
     return response
   })
@@ -40,21 +40,21 @@ export const fetchFewestGuesses = guesses => dispatch => {
   .then(data =>
     dispatch(fetchFewestGuessesSuccess(data))
   )
-  .catch(error =>
+  .catch(error => {
     dispatch(fetchFewestGuessesError(error))
-  );
+  })
 };
 
-export const saveFewestGuesses = guess => dispatch => {
-  const url = `/fewest-guesses`;
+export const saveFewestGuesses = guessCount => dispatch => {
+  const url = 'http://localhost:8090/fewest-guesses'
   return fetch(url, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      // 'Accept': 'application/json',
       'Content-type': 'application/json'
     },
     body: JSON.stringify({
-      guess: guess
+      guessCount: guessCount
     })
   })
   .then(response => {
@@ -63,19 +63,21 @@ export const saveFewestGuesses = guess => dispatch => {
       error.response = response
       throw error;
     }
-    return response;
-  })
-  .then(response => {
-    return response.json();
-  })
-  .then(data => {
-    return dispatch(
-      fetchFewestGuessesSuccess(data)
-    );
-  })
-  .catch(error => {
-    return dispatch(
-      fetchFewestGuessesError(error)
-    )
-  })
+      return response;
+    })
+    .then(response => {
+      console.log('this is the response', response)
+      response.json();
+    })
+    .then(data => {
+        console.log('this is the data', guessCount)
+        dispatch(
+        fetchFewestGuessesSuccess(guessCount)
+      );
+    })
+    .catch(error => {
+        dispatch(
+        fetchFewestGuessesError(error)
+      )
+    })
 }

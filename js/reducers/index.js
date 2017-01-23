@@ -13,29 +13,30 @@ export const hotColdReducer = (state = initialGameState, action) =>{
     return newGameObject
   }
   else if (action.type === actions.NEW_USER_GUESS){
-    
+    console.log('this is the action.guess ', action.guess, typeof action.guess)
+    const lastElementOfGuessesArray = state.guesses[state.guesses.length - 1]
+    console.log('this is the current guess index', lastElementOfGuessesArray)
+    const before = state.guesses.slice(0, lastElementOfGuessesArray)
+    console.log('this is the array before', before)
+
     if(Number(action.guess) === state.randomNumber){
       console.log('this is actually running')
-      const updatedGameObjectWon = Object.assign({}, state, {won: true})
+      const updatedGameObjectWon = Object.assign({}, state,{guesses: [...before, action.guess]}, {won: true})
       console.log('this is the update won', updatedGameObjectWon)
       return updatedGameObjectWon
     }
     else{
-      console.log('this is the action.guess ', action.guess, typeof action.guess)
-      const lastElementOfGuessesArray = state.guesses[state.guesses.length - 1]
-      console.log('this is the current guess index', lastElementOfGuessesArray)
-      const before = state.guesses.slice(0, lastElementOfGuessesArray)
-      console.log('this is the array before', before)
       const updatedGameObject = Object.assign({}, state,{guesses: [...before, action.guess]})
-      console.log('this is the new array', updatedGameObject)
       console.log('this is the updatedGameObject', updatedGameObject)
       return updatedGameObject
     }
   }
   else if (action.type === actions.FETCH_FEWEST_GUESSES_SUCCESS){
+    console.log('this happens after post', action.fewestGuesses)
     const lastElementOfAttemptsArray = state.fewestGuesses[state.fewestGuesses.length -1];
     const before = state.fewestGuesses.slice(0, lastElementOfAttemptsArray);
-    const updatedFewestGuessesObject = Object.assign({}, state, {fewestGuesses: [...before, action.fewestGuesses]})
+    console.log('this happens after post', action.guesses)
+    const updatedFewestGuessesObject = Object.assign({}, state, {fewestGuesses: [...before, action.guesses]})
     return updatedFewestGuessesObject
   }
   else if (action.type === actions.FETCH_FEWEST_GUESSES_ERROR) {

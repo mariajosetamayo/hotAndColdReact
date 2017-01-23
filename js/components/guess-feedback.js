@@ -70,20 +70,19 @@ class GuessFeedback extends Component {
   }
 
   // componentDidMount(){
-  //   this.props.dispatch(
-  //     actions.fetchFewestGuesses(this.state.fewestGuesses)
-  //   )
+  //   if(this.state.won === true){
+  //     this.props.dispatch(
+  //       actions.fetchFewestGuesses()
+  //     )
+  //   }
   // }
-  //
-  componentDidMount(){
-    if(this.state.won === true){
-      this.props.dispatch(
-        actions.saveFewestGuesses(this.props.guesses.length)
-      )
-    }
-  }
 
   render(){
+    // if(this.state.won === true){
+    //   this.props.dispatch(
+    //     actions.fetchFewestGuesses()
+    //   )
+    // }
     return (
       <div className= "list-group">
         <ul>
