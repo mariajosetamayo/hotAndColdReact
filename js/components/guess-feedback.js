@@ -16,7 +16,8 @@ class GuessFeedback extends Component {
       this.setState({
         randomNumber: store.getState().randomNumber,
         guesses: store.getState().guesses,
-        fewestGuesses: store.getState().fewestGuesses
+        fewestGuesses: store.getState().fewestGuesses,
+        won: store.getState().won
       });
     });
   }
@@ -68,10 +69,18 @@ class GuessFeedback extends Component {
     })
   }
 
+  // componentDidMount(){
+  //   this.props.dispatch(
+  //     actions.fetchFewestGuesses(this.state.fewestGuesses)
+  //   )
+  // }
+  //
   componentDidMount(){
-    this.props.dispatch(
-      actions.fetchFewestGuesses(this.state.fewestGuesses)
-    )
+    if(this.state.won === true){
+      this.props.dispatch(
+        actions.saveFewestGuesses(this.props.guesses.length)
+      )
+    }
   }
 
   render(){

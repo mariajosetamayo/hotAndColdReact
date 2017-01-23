@@ -3,7 +3,8 @@ import * as actions from '../actions/index';
 const initialGameState = {
   randomNumber: Math.floor(Math.random() * 100) + 1,
   guesses: [],
-  fewestGuesses: ''
+  fewestGuesses: '',
+  won: false
 }
 
 export const hotColdReducer = (state = initialGameState, action) =>{
@@ -12,14 +13,24 @@ export const hotColdReducer = (state = initialGameState, action) =>{
     return newGameObject
   }
   else if (action.type === actions.NEW_USER_GUESS){
-    console.log('this is the guess', action.guess)
-    const lastElementOfGuessesArray = state.guesses[state.guesses.length - 1]
-    console.log('this is the current guess index', lastElementOfGuessesArray)
-    const before = state.guesses.slice(0, lastElementOfGuessesArray)
-    console.log('this is the array before', before)
-    const updatedGameObject = Object.assign({}, state,{guesses: [...before, action.guess]})
-    console.log('this is the new array', updatedGameObject)
-    return updatedGameObject
+    
+    if(Number(action.guess) === state.randomNumber){
+      console.log('this is actually running')
+      const updatedGameObjectWon = Object.assign({}, state, {won: true})
+      console.log('this is the update won', updatedGameObjectWon)
+      return updatedGameObjectWon
+    }
+    else{
+      console.log('this is the action.guess ', action.guess, typeof action.guess)
+      const lastElementOfGuessesArray = state.guesses[state.guesses.length - 1]
+      console.log('this is the current guess index', lastElementOfGuessesArray)
+      const before = state.guesses.slice(0, lastElementOfGuessesArray)
+      console.log('this is the array before', before)
+      const updatedGameObject = Object.assign({}, state,{guesses: [...before, action.guess]})
+      console.log('this is the new array', updatedGameObject)
+      console.log('this is the updatedGameObject', updatedGameObject)
+      return updatedGameObject
+    }
   }
   else if (action.type === actions.FETCH_FEWEST_GUESSES_SUCCESS){
     const lastElementOfAttemptsArray = state.fewestGuesses[state.fewestGuesses.length -1];
