@@ -36,7 +36,7 @@ export const hotColdReducer = (state = initialGameState, action) =>{
     const lastElementOfAttemptsArray = state.fewestGuesses[state.fewestGuesses.length -1];
     const before = state.fewestGuesses.slice(0, lastElementOfAttemptsArray);
     console.log('this happens after post', action.guesses)
-    const updatedFewestGuessesObject = Object.assign({}, state, {fewestGuesses: [...before, action.guesses]})
+    const updatedFewestGuessesObject = Object.assign({}, state, {guesses: [...before, action.guess]}, {won: true}, {fewestGuesses: [...before, action.guesses]})
     return updatedFewestGuessesObject
   }
   else if (action.type === actions.FETCH_FEWEST_GUESSES_ERROR) {

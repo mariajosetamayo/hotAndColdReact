@@ -15,8 +15,8 @@ export const resetGame = (randomNumber) => ({
 
 export const FETCH_FEWEST_GUESSES_SUCCESS = 'FETCH_FEWEST_GUESSES_SUCCESS';
 export const fetchFewestGuessesSuccess = (fewestGuesses) => ({
-  type: FETCH_FEWEST_GUESSES,
-  fewestGuesses
+  type: FETCH_FEWEST_GUESSES_SUCCESS,
+  fewestGuesses: fewestGuesses
 });
 
 export const FETCH_FEWEST_GUESSES_ERROR = 'FETCH_FEWEST_GUESSES_ERROR';
@@ -67,16 +67,16 @@ export const saveFewestGuesses = guessCount => dispatch => {
     })
     .then(response => {
       console.log('this is the response', response)
-      response.json();
+      return response.json();
     })
     .then(data => {
-        console.log('this is the data', guessCount)
-        dispatch(
-        fetchFewestGuessesSuccess(guessCount)
+      console.log('this is the data', data)
+      return dispatch(
+        fetchFewestGuessesSuccess(data)
       );
     })
     .catch(error => {
-        dispatch(
+        return dispatch(
         fetchFewestGuessesError(error)
       )
     })

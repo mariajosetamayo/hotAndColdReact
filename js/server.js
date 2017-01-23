@@ -27,7 +27,6 @@ app.post('/fewest-guesses', function (req, res){
   console.log('this is the body', req.body)
   guesses.push(req.body.guessCount);
   let fewestGuesses = Math.min.apply(Math, guesses);
-  console.log('this is the response', res.fewestGuesses)
   res.status(200).json(fewestGuesses)
 
 });

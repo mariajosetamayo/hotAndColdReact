@@ -15,13 +15,23 @@ class GuessForm extends Component {
     this.newGuess.value='';
   }
 
+  // componentDidMount(){
+  //   if(this.props.guesses.won){
+  //     this.props.dispatch(
+  //       actions.saveFewestGuesses(this.props.guesses.guesses.length)
+  //     )
+  //   }
+  // }
+
+
   render (){
     console.log('length of guesses', this.props.guesses.won)
-    if(this.props.guesses.won === true){
+    if(this.props.guesses.won){
       this.props.dispatch(
         actions.saveFewestGuesses(this.props.guesses.guesses.length)
       )
     }
+
     return(
       <div className="guessInput">
         <label>
@@ -37,5 +47,6 @@ class GuessForm extends Component {
 const mapStateToProps = (state, props) => ({
   guesses: state
 })
+
 
 export default connect (mapStateToProps)(GuessForm);
