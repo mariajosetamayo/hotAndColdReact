@@ -7,7 +7,7 @@ import * as actions from '../actions/index';
 class GuessFeedback extends Component {
   constructor(props){
     super(props);
-
+    console.log(props)
     this.state = {
       randomNumber: '',
       guesses: []
@@ -20,6 +20,7 @@ class GuessFeedback extends Component {
         won: store.getState().won
       });
     });
+
   }
 
   renderFeedback () {
@@ -36,7 +37,7 @@ class GuessFeedback extends Component {
       const guessAndRandomNumberDifference = Math.abs(this.state.randomNumber - this.state.guesses.slice(-1));
       console.log('this is the difference', guessAndRandomNumberDifference)
 
-      if ( guessAndRandomNumberDifference === 0){
+      if ( guessAndRandomNumberDifference === 0 || this.state.won){
         guessFeedback = 'You won!'
       }
       else if (guessAndRandomNumberDifference < 5){
@@ -59,25 +60,27 @@ class GuessFeedback extends Component {
 
 
   renderGuessesList () {
-    return this.state.guesses.map((guess) =>{
+    return this.state.guesses.map((guess, index) =>{
       return(
         <li
-          key={guess}>
+          key={index}>
           {guess}
         </li>
       )
     })
   }
 
-  // componentDidMount(){
-  //   if(this.state.won === true){
-  //     this.props.dispatch(
-  //       actions.fetchFewestGuesses()
-  //     )
-  //   }
-  // }
+
+  componentDidMount(){
+    if(this.state.won){
+      this.props.dispatch(
+        actions.fetchFewestGuesses()
+      )
+    }
+  }
 
   render(){
+    // console.log("THIS IS MY STATE ON FEEDBACK: ", this.state.won)
     // if(this.state.won === true){
     //   this.props.dispatch(
     //     actions.fetchFewestGuesses()
@@ -99,11 +102,17 @@ class GuessFeedback extends Component {
           </ul>
         </ul>
         <ul>
-          <div><h3>Fewest Guesses</h3>{this.state.fewestGuesses}</div>
+          <div><h3>Fewest Guesses</h3>
+            {this.state.fewestGuesses}
+          </div>
         </ul>
       </div>
     );
   }
 };
+
+// const mapStateToProps = (state, props) => ({
+//   won: state
+// })
 
 export default connect()(GuessFeedback);

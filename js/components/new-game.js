@@ -23,8 +23,8 @@ class NewGame extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  randomNumber: state.randomNumber
-})
+// const mapStateToProps = (state, props) => ({
+//   randomNumber: state.randomNumber
+// })
 
-export default connect (mapStateToProps)(NewGame);
+export default connect ()(NewGame);

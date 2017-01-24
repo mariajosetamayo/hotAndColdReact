@@ -6,8 +6,15 @@ import * as actions from '../actions/index';
 class GuessForm extends Component {
   constructor (props){
     super(props);
+    //test
+    this.state = {
+      haveIWon: false,
+    }
+    //test
+    console.log(props)
     this.onInputChange = this.onInputChange.bind(this);
   }
+
 
   onInputChange (){
     const guess = this.newGuess.value;
@@ -15,23 +22,41 @@ class GuessForm extends Component {
     this.newGuess.value='';
   }
 
-  // componentDidMount(){
-  //   if(this.props.guesses.won){
-  //     this.props.dispatch(
-  //       actions.saveFewestGuesses(this.props.guesses.guesses.length)
-  //     )
-  //   }
-  // }
-
-
-  render (){
-    console.log('length of guesses', this.props.guesses.won)
-    if(this.props.guesses.won){
+  onUserWon (){
+    if(this.props.guesses.guesses.won){
       this.props.dispatch(
         actions.saveFewestGuesses(this.props.guesses.guesses.length)
       )
     }
+  }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const winner = this.props.guesses.won
+    console.log ("INSIDE THE shouldComponentUpdate: we got STATE being ", this.state.haveIWon, "NEXTSTATE: ", nextState, " and PROP being ", winner, " NEXTPROP: ", nextProps)
+    if(nextProps.guesses.won && !nextState.haveIWon){
+      console.log("WE ARE CHANGING THE HAVEIWON")
+      this.setState({
+        haveIWon: true,
+      })
+      return true
+    } else if (nextProps.guesses.won && nextState.haveIWon) {
+      return false
+    }
+    return true
+  }
+
+  render (){
+    //test
+    // console.log('length of guesses', this.props.guesses.won)
+    const winner = this.props.guesses.won
+    console.log("HAVEIWON IS ", this.state.haveIWon, " AND PROP IS ", this.props.guesses.won)
+    if(winner && !this.state.haveIWon){
+      alert('you won the game')
+      this.props.dispatch(
+        actions.saveFewestGuesses(this.props.guesses.guesses.length)
+      )
+    }
+    //test
     return(
       <div className="guessInput">
         <label>
