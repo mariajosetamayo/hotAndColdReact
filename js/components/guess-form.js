@@ -33,9 +33,4 @@ class GuessForm extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  guesses: state
-})
-
-
-export default connect (mapStateToProps)(GuessForm);
+export default connect ()(GuessForm);
