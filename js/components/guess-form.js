@@ -22,13 +22,13 @@ class GuessForm extends Component {
     this.newGuess.value='';
   }
 
-  onUserWon (){
-    if(this.props.guesses.guesses.won){
-      this.props.dispatch(
-        actions.saveFewestGuesses(this.props.guesses.guesses.length)
-      )
-    }
-  }
+  // onUserWon (){
+  //   if(this.props.guesses.guesses.won){
+  //     this.props.dispatch(
+  //       actions.saveFewestGuesses(this.props.guesses.guesses.length)
+  //     )
+  //   }
+  // }
 
   shouldComponentUpdate(nextProps, nextState) {
     const winner = this.props.guesses.won

@@ -8,9 +8,8 @@ export const newUserGuess = (guess) => ({
 });
 
 export const RESET_GAME = 'RESET_GAME';
-export const resetGame = (randomNumber) => ({
-  type: RESET_GAME,
-  randomNumber: randomNumber
+export const resetGame = () => ({
+  type: RESET_GAME
 });
 
 export const FETCH_FEWEST_GUESSES_SUCCESS = 'FETCH_FEWEST_GUESSES_SUCCESS';
