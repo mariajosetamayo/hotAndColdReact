@@ -35,10 +35,13 @@ export const fetchFewestGuesses = guesses => dispatch => {
     }
     return response
   })
-  .then(response => response.json())
-  .then(data =>
+  .then(response => {
+    response.json()
+  })
+  .then(data => {
+    console.log('data from get request', data)
     dispatch(fetchFewestGuessesSuccess(data))
-  )
+  })
   .catch(error => {
     dispatch(fetchFewestGuessesError(error))
   })

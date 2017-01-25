@@ -8,6 +8,23 @@ class GuessFeedback extends Component {
   constructor(props){
     super(props);
     console.log('these are the props', props)
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange (){
+    if(this.props.state.won){
+      this.props.dispatch(
+        actions.saveFewestGuesses(this.props.state.guesses.length)
+      )
+    }
+  }
+
+  componentDidMount(){
+    if(this.props.state.won && this.props.state.fewestGuesses.length !== 0){
+      this.props.dispatch(
+        actions.fetchFewestGuesses()
+      )
+    }
   }
 
   renderFeedback () {
@@ -59,21 +76,9 @@ class GuessFeedback extends Component {
   }
 
 
-  componentDidMount(){
-    if(this.props.state.won){
-      this.props.dispatch(
-        actions.fetchFewestGuesses()
-      )
-    }
-  }
+
 
   render(){
-    // console.log("THIS IS MY STATE ON FEEDBACK: ", this.state.won)
-    // if(this.state.won === true){
-    //   this.props.dispatch(
-    //     actions.fetchFewestGuesses()
-    //   )
-    // }
     return (
       <div className= "list-group">
         <ul>
@@ -93,6 +98,9 @@ class GuessFeedback extends Component {
           <div><h3>Fewest Guesses</h3>
             {this.props.state.fewestGuesses}
           </div>
+        </ul>
+        <ul>
+          <button type="button" className="btn btn-primary" onClick={ this.onChange}>Fewest</button>
         </ul>
       </div>
     );
