@@ -34,7 +34,7 @@ li{
   font-weight: bold;
 }
 
-.guessesNumber{
+.guessesNumber, .fewestGuesses{
   font-size: 22px;
   color: #1AA3A3;
   font-weight: bold;

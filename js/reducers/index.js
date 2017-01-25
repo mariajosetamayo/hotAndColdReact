@@ -9,7 +9,7 @@ const initialGameState = {
 
 export const hotColdReducer = (state = initialGameState, action) =>{
   if (action.type === actions.RESET_GAME){
-    const newGameObject = Object.assign({},{randomNumber:Math.floor(Math.random() * 100) + 1}, {guesses:[]})
+    const newGameObject = Object.assign({},{randomNumber:Math.floor(Math.random() * 100) + 1}, {guesses:[]}, {fewestGuesses:[]})
     return newGameObject
   }
   else if (action.type === actions.NEW_USER_GUESS){
@@ -35,6 +35,7 @@ export const hotColdReducer = (state = initialGameState, action) =>{
     return updatedFewestGuessesObject
   }
   else if (action.type === actions.FETCH_FEWEST_GUESSES_ERROR) {
+    console.log('reducer fewest guesses',state.fewestGuesses )
     if (state.fewestGuesses.length === 0){
       console.log('An error occurred: ' + action.error);
       return state;

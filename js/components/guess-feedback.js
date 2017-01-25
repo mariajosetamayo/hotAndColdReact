@@ -93,7 +93,9 @@ class GuessFeedback extends Component {
         </ul>
         <ul>
           <div><h3>Fewest Guesses</h3>
+          <ul className="fewestGuesses">
             {this.props.state.fewestGuesses}
+          </ul>
           </div>
         </ul>
         <ul>
