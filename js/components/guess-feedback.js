@@ -75,9 +75,6 @@ class GuessFeedback extends Component {
     })
   }
 
-
-
-
   render(){
     return (
       <div className= "list-group">
